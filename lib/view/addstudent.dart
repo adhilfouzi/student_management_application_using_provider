@@ -74,8 +74,8 @@ class AddStudent extends StatelessWidget {
     }
 
     final value = StudentModel(
-      name: nameController.text,
-      father: fatherController.text,
+      name: nameController.text.toUpperCase(),
+      father: fatherController.text.toUpperCase(),
       phoneNumber: phonenumberController.text,
     );
 

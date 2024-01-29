@@ -19,7 +19,7 @@ class EditStudent extends StatelessWidget {
         .firstWhere((student) => student.id == studentId, orElse: () {
       // Return a default StudentModel if the student is not found
       return StudentModel(
-        id: -1, // Set some default value for ID
+        id: -5, // Set some default value for ID
         name: 'Empty',
         father: 'Empty',
         phoneNumber: 'Empty',
@@ -27,7 +27,7 @@ class EditStudent extends StatelessWidget {
     });
 
     // Check if the student ID is negative, indicating it wasn't found
-    if (student.id == -1) {
+    if (student.id == -5) {
       // Handle the case where the student is not found (optional)
       return Scaffold(
         appBar: AppBar(title: const Text('Edit Student')),

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:student_management_application_using_provider/controller/provider/student_provider.dart';
 import 'package:student_management_application_using_provider/Model/studentmodel.dart';
 import 'package:student_management_application_using_provider/controller/widget/textform.dart';
+import 'package:student_management_application_using_provider/view/viewstudent.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -42,13 +43,18 @@ class SearchScreen extends StatelessWidget {
                     itemCount: searchResults.length,
                     itemBuilder: (context, index) {
                       final student = searchResults[index];
-                      return ListTile(
-                        title: Text(student.name),
-                        subtitle: Text('S/O: ${student.father}'),
-                        onTap: () {
-                          // Handle tapping on a search result
-                          // You can navigate to a detail screen or perform other actions
-                        },
+                      return Card(
+                        elevation: 2,
+                        surfaceTintColor: Colors.green,
+                        child: ListTile(
+                          title: Text(student.name),
+                          subtitle: Text('S/O: ${student.father}'),
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => StudentDetailScreen(
+                                    studentId: student.id!)));
+                          },
+                        ),
                       );
                     },
                   );

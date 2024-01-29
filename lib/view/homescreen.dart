@@ -5,6 +5,7 @@ import 'package:student_management_application_using_provider/view/addstudent.da
 import 'package:student_management_application_using_provider/Model/studentmodel.dart';
 import 'package:student_management_application_using_provider/view/editstudent.dart';
 import 'package:student_management_application_using_provider/view/searchstudent.dart';
+import 'package:student_management_application_using_provider/view/viewstudent.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -42,7 +43,14 @@ class HomeScreen extends StatelessWidget {
                   final student = students[index];
                   final id = student.id;
                   return Card(
+                    elevation: 2,
+                    surfaceTintColor: Colors.green,
                     child: ListTile(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) =>
+                                StudentDetailScreen(studentId: id!)));
+                      },
                       leading: CircleAvatar(
                         child: Text((index + 1).toString()),
                       ),
