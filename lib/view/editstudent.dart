@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:student_management_application_using_provider/controller/provider/student_provider.dart';
 import 'package:student_management_application_using_provider/Model/studentmodel.dart';
+import 'package:student_management_application_using_provider/controller/widget/submitbutton.dart';
 import 'package:student_management_application_using_provider/controller/widget/textform.dart';
 
 class EditStudent extends StatelessWidget {
   final int studentId;
 
-  EditStudent({required this.studentId, Key? key}) : super(key: key);
+  const EditStudent({super.key, required this.studentId});
 
   @override
   Widget build(BuildContext context) {
@@ -46,46 +47,47 @@ class EditStudent extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: const Text('Edit Student')),
-      body: Column(
-        children: [
-          TextFormWirte(
-            controller: nameController,
-            textcontent: 'Name',
-            keyboardType: TextInputType.name,
-          ),
-          TextFormWirte(
-            controller: fatherController,
-            textcontent: 'Father',
-            keyboardType: TextInputType.name,
-          ),
-          TextFormWirte(
-            controller: phoneNumberController,
-            textcontent: 'Phone Number',
-            keyboardType: TextInputType.phone,
-          ),
-          const SizedBox(height: 10),
-          Row(
-            children: [
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () {
-                    // Update the student data
-                    StudentModel updatedStudent = StudentModel(
-                      id: studentId,
-                      name: nameController.text,
-                      father: fatherController.text,
-                      phoneNumber: phoneNumberController.text,
-                    );
-                    context.read<StudentProvider>().editStudent(updatedStudent);
-                    // Navigate back after editing
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Save Changes'),
-                ),
-              ),
-            ],
-          ),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          children: [
+            TextFormWirte(
+              controller: nameController,
+              textcontent: 'Name',
+              keyboardType: TextInputType.name,
+            ),
+            TextFormWirte(
+              controller: fatherController,
+              textcontent: 'Father',
+              keyboardType: TextInputType.name,
+            ),
+            TextFormWirte(
+              controller: phoneNumberController,
+              textcontent: 'Phone Number',
+              keyboardType: TextInputType.phone,
+            ),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                Expanded(
+                    child: SubmitButton(
+                        onTap: () {
+                          StudentModel updatedStudent = StudentModel(
+                            id: studentId,
+                            name: nameController.text,
+                            father: fatherController.text,
+                            phoneNumber: phoneNumberController.text,
+                          );
+                          context
+                              .read<StudentProvider>()
+                              .editStudent(updatedStudent);
+                          Navigator.pop(context);
+                        },
+                        textcontent: 'Save Changes')),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

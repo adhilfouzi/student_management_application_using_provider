@@ -3,7 +3,9 @@ import 'package:student_management_application_using_provider/Model/studentmodel
 
 class StudentProvider with ChangeNotifier {
   List<StudentModel> stList = [];
+  List<StudentModel> searchResults = [];
   int id = -1;
+
   void addStudent(StudentModel value) {
     value.id = id++;
     stList.add(value);
@@ -21,6 +23,24 @@ class StudentProvider with ChangeNotifier {
 
   void deleteStudent(int studentId) {
     stList.removeWhere((student) => student.id == studentId);
+    notifyListeners();
+  }
+
+  void searchStudents(String query) {
+    // Clear previous search results
+    searchResults.clear();
+
+    // If the query is empty, return all students
+    if (query.isEmpty) {
+      searchResults.addAll(stList);
+    } else {
+      // Filter students whose name contains the query
+      searchResults.addAll(
+        stList.where((student) =>
+            student.name.toLowerCase().contains(query.toLowerCase())),
+      );
+    }
+
     notifyListeners();
   }
 }

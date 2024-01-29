@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:student_management_application_using_provider/controller/provider/student_provider.dart';
 import 'package:student_management_application_using_provider/Model/studentmodel.dart';
+import 'package:student_management_application_using_provider/controller/widget/submitbutton.dart';
 import 'package:student_management_application_using_provider/controller/widget/textform.dart';
 
 class AddStudent extends StatelessWidget {
@@ -14,39 +15,47 @@ class AddStudent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Add Student'), centerTitle: true),
-      body: Builder(
-        builder: (context) => Column(
-          children: [
-            TextFormWirte(
-              controller: nameController,
-              textcontent: 'Name',
-              keyboardType: TextInputType.name,
-            ),
-            TextFormWirte(
-              controller: fatherController,
-              textcontent: 'Father',
-              keyboardType: TextInputType.name,
-            ),
-            TextFormWirte(
-              textcontent: 'Phone Number',
-              controller: phonenumberController,
-              keyboardType: TextInputType.phone,
-            ),
-            const SizedBox(height: 10),
-            Row(
-              children: [
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      add(context);
-                    },
-                    child: const Text('Submit'),
-                  ),
-                ),
-              ],
-            ),
-          ],
+      appBar: AppBar(
+          title: const Text('Add Student'),
+          centerTitle: true,
+          leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.arrow_back_ios))),
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Builder(
+          builder: (context) => Column(
+            children: [
+              TextFormWirte(
+                controller: nameController,
+                textcontent: 'Name',
+                keyboardType: TextInputType.name,
+              ),
+              TextFormWirte(
+                controller: fatherController,
+                textcontent: 'Father',
+                keyboardType: TextInputType.name,
+              ),
+              TextFormWirte(
+                textcontent: 'Phone Number',
+                controller: phonenumberController,
+                keyboardType: TextInputType.phone,
+              ),
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  Expanded(
+                      child: SubmitButton(
+                          onTap: () {
+                            add(context);
+                          },
+                          textcontent: 'Submit')),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -4,6 +4,7 @@ import 'package:student_management_application_using_provider/controller/provide
 import 'package:student_management_application_using_provider/view/addstudent.dart';
 import 'package:student_management_application_using_provider/Model/studentmodel.dart';
 import 'package:student_management_application_using_provider/view/editstudent.dart';
+import 'package:student_management_application_using_provider/view/searchstudent.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -11,7 +12,17 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Student Management')),
+      appBar: AppBar(
+        title: const Text('Student Management'),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const SearchScreen()));
+              },
+              icon: const Icon(Icons.search))
+        ],
+      ),
       body: Consumer<StudentProvider>(
         builder: (context, studentProvider, _) {
           List<StudentModel> students = studentProvider.stList;
