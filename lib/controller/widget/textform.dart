@@ -36,6 +36,8 @@ class TextFormWirte extends StatelessWidget {
               onChanged: onChanged,
               validator: validator,
               decoration: InputDecoration(
+                fillColor: const Color.fromARGB(255, 56, 56, 56),
+                filled: true,
                 enabledBorder: const OutlineInputBorder(
                     borderSide:
                         BorderSide(color: Color.fromARGB(255, 102, 102, 102)),
@@ -45,10 +47,13 @@ class TextFormWirte extends StatelessWidget {
                       color: Color.fromARGB(255, 255, 255, 255),
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(20))),
-                border:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
-                fillColor: const Color.fromARGB(255, 56, 56, 56),
-                filled: true,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(40.0),
+                  borderSide:
+                      const BorderSide(color: Colors.greenAccent, width: 2),
+                ),
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
               )),
         ),
       ],

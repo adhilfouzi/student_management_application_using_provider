@@ -34,43 +34,51 @@ class HomeScreen extends StatelessWidget {
               ),
             );
           } else {
-            return ListView.builder(
-              itemCount: students.length,
-              itemBuilder: (context, index) {
-                final student = students[index];
-                final id = student.id;
-                return ListTile(
-                  title: Text(student.name),
-                  subtitle: Text('S/O: ${student.father}'),
-                  trailing: PopupMenuButton(
-                    itemBuilder: (context) => [
-                      const PopupMenuItem(
-                        value: 'edit',
-                        child: Text('Edit'),
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListView.builder(
+                itemCount: students.length,
+                itemBuilder: (context, index) {
+                  final student = students[index];
+                  final id = student.id;
+                  return Card(
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        child: Text((index + 1).toString()),
                       ),
-                      const PopupMenuItem(
-                        value: 'delete',
-                        child: Text('Delete'),
-                      ),
-                    ],
-                    onSelected: (value) {
-                      if (value == 'edit') {
-                        // Implement edit functionality
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => EditStudent(
-                              studentId: id!,
-                            ),
+                      title: Text(student.name),
+                      subtitle: Text('S/O: ${student.father}'),
+                      trailing: PopupMenuButton(
+                        itemBuilder: (context) => [
+                          const PopupMenuItem(
+                            value: 'edit',
+                            child: Text('Edit'),
                           ),
-                        );
-                      } else if (value == 'delete') {
-                        // Implement delete functionality
-                        studentProvider.deleteStudent(student.id!);
-                      }
-                    },
-                  ),
-                );
-              },
+                          const PopupMenuItem(
+                            value: 'delete',
+                            child: Text('Delete'),
+                          ),
+                        ],
+                        onSelected: (value) {
+                          if (value == 'edit') {
+                            // Implement edit functionality
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => EditStudent(
+                                  studentId: id!,
+                                ),
+                              ),
+                            );
+                          } else if (value == 'delete') {
+                            // Implement delete functionality
+                            studentProvider.deleteStudent(student.id!);
+                          }
+                        },
+                      ),
+                    ),
+                  );
+                },
+              ),
             );
           }
         },
