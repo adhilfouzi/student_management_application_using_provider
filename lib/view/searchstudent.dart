@@ -39,25 +39,31 @@ class SearchScreen extends StatelessWidget {
                 builder: (context, studentProvider, _) {
                   List<StudentModel> searchResults =
                       studentProvider.searchResults;
-                  return ListView.builder(
-                    itemCount: searchResults.length,
-                    itemBuilder: (context, index) {
-                      final student = searchResults[index];
-                      return Card(
-                        elevation: 2,
-                        surfaceTintColor: Colors.green,
-                        child: ListTile(
-                          title: Text(student.name),
-                          subtitle: Text('S/O: ${student.father}'),
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => StudentDetailScreen(
-                                    studentId: student.id!)));
-                          },
-                        ),
-                      );
-                    },
-                  );
+                  if (searchResults.isEmpty) {
+                    return const Center(
+                      child: Text('No value found'),
+                    );
+                  } else {
+                    return ListView.builder(
+                      itemCount: searchResults.length,
+                      itemBuilder: (context, index) {
+                        final student = searchResults[index];
+                        return Card(
+                          elevation: 2,
+                          surfaceTintColor: Colors.green,
+                          child: ListTile(
+                            title: Text(student.name),
+                            subtitle: Text('S/O: ${student.father}'),
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => StudentDetailScreen(
+                                      studentId: student.id!)));
+                            },
+                          ),
+                        );
+                      },
+                    );
+                  }
                 },
               ),
             ),
